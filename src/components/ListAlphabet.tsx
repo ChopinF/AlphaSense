@@ -1,5 +1,4 @@
 "use client";
-import { Languages } from "next/dist/lib/metadata/types/alternative-urls-types";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Volume2 } from "lucide-react";
