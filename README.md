@@ -11,12 +11,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - **Hearing Quizzes** – Improve your listening skills by identifying spoken alphabet characters.
 
 ## Technologies Used
-- **Backend:** ASP.NET Core 9.0, Entity Framework Core
-- **Frontend:** Razor Views (.cshtml), Bootstrap
-- **Database:** SQLite
-- **Authentication:** Identity Framework
-- **Email Service:** SMTP
-## Technologies Used
 
 - **Frontend**: Next.js, React, Tailwind CSS, Framer Motion, TypeScript
 - **State Management**: React Hooks
@@ -29,11 +23,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - **public/** – Static assets (SVGs, Images, Sounds)
 
 ## Installation & Setup
-
-### Prerequisites
-- .NET 9.0 SDK
-- SQLite (Bundled with EF Core)
-- SMTP credentials for email service (if needed)
 
 ### Prerequisites
 - **Node.js** (Latest LTS version recommended)
