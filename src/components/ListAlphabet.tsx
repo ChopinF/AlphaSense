@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "./ui/button";
 import { Volume2 } from "lucide-react";
 

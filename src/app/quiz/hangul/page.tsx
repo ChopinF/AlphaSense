@@ -1,6 +1,5 @@
 "use client";
 import Quiz from "@/components/Quiz";
-import kroman from "kroman";
 import { useEffect } from "react";
 import { hangulLetters } from "@/lib/hangul";
 
