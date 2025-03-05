@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/ui/Navbar";
 import Footer from "@/components/ui/footer";
 import { Analytics } from "@vercel/analytics/remix";
+import { BrowserRouter as Router } from "react-router-dom";
 
 
 export default function RootLayout({
@@ -11,12 +12,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex flex-col min-h-screen antialiased">
-        <Navbar />
-        <main className="flex-grow">{children}</main>
-        <Analytics />
-        <footer>
-          <Footer />
-        </footer>
+        <Router>
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+          <Analytics />
+          <footer>
+            <Footer />
+          </footer>
+        </Router>
       </body>
     </html>
   );
