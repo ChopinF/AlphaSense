@@ -86,7 +86,7 @@ export default function QuizPage() {
         >
           <Link href="/quiz/hangul">
             <motion.img
-              src="/images/hangul.svg"
+              src="/images/korean.svg"
               alt="Hangul Alphabet"
               className="mx-auto w-24 h-24 mb-4"
               whileHover={{ scale: 1.1 }}
