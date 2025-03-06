@@ -58,8 +58,11 @@ export default function Quiz({ letters, title, language }: QuizProps) {
   const [score, setScore] = useState(0);
   const [attempts, setAttempts] = useState(0);
   const [status, setStatus] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const checkAnswer = () => {
+    if (isDisabled) return;
+    setIsDisabled(true);
     const isCorrect = input.toLowerCase() === current.english.toLowerCase();
     if (isCorrect) {
       setMessage("✅ Correct!");
@@ -75,6 +78,7 @@ export default function Quiz({ letters, title, language }: QuizProps) {
       setInput("");
       setMessage("");
       setStatus("");
+      setIsDisabled(false);
     }, 1500);
   };
 
@@ -111,7 +115,7 @@ export default function Quiz({ letters, title, language }: QuizProps) {
         />
         <br />
 
-        <Button onClick={checkAnswer} variant="negru" className="mt-4">
+        <Button onClick={checkAnswer} variant="negru" className="mt-4" disabled={isDisabled}>
           Submit
         </Button>
 
