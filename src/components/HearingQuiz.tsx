@@ -59,6 +59,7 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
   const [attempts, setAttempts] = useState(0);
   const [status, setStatus] = useState("");
   const [autoPlay, setAutoPlay] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
 
   useEffect(() => {
@@ -85,6 +86,8 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
   }
 
   const checkAnswer = (selected: Letter) => {
+    if (isDisabled) return;
+    setIsDisabled(true);
     if (selected.english === current.english) {
       setMessage("✅ Correct!");
       setStatus("correct");
@@ -99,6 +102,7 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
       setCurrent(letters[Math.floor(Math.random() * letters.length)]);
       setMessage("");
       setStatus("");
+      setIsDisabled(false);
     }, 1500);
   };
 
@@ -136,9 +140,10 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
               className={`p-4 border rounded-lg text-lg font-bold transition-all 
                 ${status === "correct" && option.english === current.english ? "bg-green-500" : ""}
                 ${status === "incorrect" && option.english !== current.english ? "bg-red-500" : ""}
+                ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
               `}
               onClick={() => checkAnswer(option)}
-
+              disabled={isDisabled}
               style={{ fontFamily: "Roboto, Noto Sans JP, Gugi, sans-serif" }}
             >
               <span className="text-6xl">{option.symbol}</span>
