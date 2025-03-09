@@ -1,8 +1,9 @@
 "use client";
+import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-100  border-gray-200 dark:bg-gray-800 dark:border-gray-100 ">
+    <footer className="w-full bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-100">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         <span
           className="text-xl font-semibold dark:text-white transition-transform duration-500 ease-in-out transform hover:scale-110"
@@ -10,17 +11,19 @@ export default function Footer() {
           Next.js & Tailwind
         </span>
 
-        <div className="flex justify-center items-center space-x-6 py-5">
+        <div className="flex justify-center items-center space-x-6 py-5 mt-4 md:mt-0">
           <a
             href="https://github.com/ChopinF"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
-            <img
+            <Image
               src="/svgs/github.svg"
               alt="GitHub"
               className="w-8 h-8 transition-transform duration-300 hover:scale-110"
+              width={300}
+              height={300}
             />
           </a>
           <a
@@ -29,10 +32,12 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="Instagram"
           >
-            <img
+            <Image
               src="/svgs/insta.svg"
               alt="Instagram"
               className="w-8 h-8 transition-transform duration-300 hover:scale-110"
+              width={300}
+              height={300}
             />
           </a>
           <a
@@ -41,10 +46,12 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="LinkedIn"
           >
-            <img
+            <Image
               src="/svgs/linkedin.svg"
               alt="LinkedIn"
               className="w-8 h-8 transition-transform duration-300 hover:scale-110"
+              width={300}
+              height={300}
             />
           </a>
         </div>
@@ -57,3 +64,4 @@ export default function Footer() {
     </footer>
   );
 }
+

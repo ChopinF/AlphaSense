@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useState } from "react";
 import ListAlphabet from "./ListAlphabet";
-import { Button } from "./ui/button";
+import { Button } from "./ui/Button";
 import { motion } from "framer-motion";
 import { Volume2 } from "lucide-react";
+import { shuffleArray } from "@/lib/shuffle";
 
 type Letter = {
   symbol?: string;
@@ -30,6 +31,25 @@ type QuizProps = {
   language: keyof Language;
 }
 
+type State = {
+  current: Letter;
+  options: Letter[];
+  message: string;
+  score: number;
+  attempts: number;
+  status: string;
+  isDisabled: boolean;
+};
+
+type Action =
+  | { type: "SET_CURRENT"; letter: Letter }
+  | { type: "SET_OPTIONS"; options: Letter[] }
+  | { type: "SET_MESSAGE"; message: string }
+  | { type: "INCREMENT_SCORE" }
+  | { type: "INCREMENT_ATTEMPTS" }
+  | { type: "SET_STATUS"; status: string }
+  | { type: "SET_DISABLED"; disabled: boolean }
+
 export default function HearingQuiz({ letters, title, language }: QuizProps) {
   useEffect(() => {
     const fonts = {
@@ -52,55 +72,110 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
     document.head.appendChild(link);
   }, [language]);
 
-  const [current, setCurrent] = useState(letters[Math.floor(Math.random() * letters.length)]);
-  const [options, setOptions] = useState<Letter[]>([]);
-  const [message, setMessage] = useState("");
-  const [score, setScore] = useState(0);
-  const [attempts, setAttempts] = useState(0);
-  const [status, setStatus] = useState("");
-  const [autoPlay, setAutoPlay] = useState(false);
+  const initialState: State = {
+    current: {} as Letter,
+    options: [],
+    message: "",
+    score: 0,
+    attempts: 0,
+    status: "",
+    isDisabled: false,
+  };
 
 
-  useEffect(() => {
-    const shuffled = [...letters]
-      .filter((letter) => letter.symbol !== current.symbol) // remove the current letter
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 2);
+  const quizReducer = (state: State, action: Action): State => {
+    switch (action.type) {
+      case "SET_CURRENT":
+        {
+          const shuffled = [...letters]
+            .filter((letter) => letter.symbol !== action.letter.symbol)
+            .sort(() => 0.5 - Math.random())
+            .slice(0, 2);
 
-    setOptions([current, ...shuffled].sort(() => 0.5 - Math.random()));
-  }, [current, letters]);
-
-  useEffect(() => {
-    if (autoPlay && current.sound_path) {
-      const audio = new Audio(current.sound_path);
-      audio.play();
+          return {
+            ...state,
+            current: action.letter,
+            options: [action.letter, ...shuffled].sort(() => 0.5 - Math.random())
+          };
+        }
+      case "SET_OPTIONS":
+        return { ...state, options: action.options };
+      case "SET_MESSAGE":
+        return { ...state, message: action.message }
+      case "INCREMENT_SCORE":
+        return { ...state, score: state.score + 1 };
+      case "INCREMENT_ATTEMPTS":
+        return { ...state, attempts: state.attempts + 1 };
+      case "SET_STATUS":
+        return { ...state, status: action.status };
+      case "SET_DISABLED":
+        return { ...state, isDisabled: action.disabled };
+      default:
+        return state;
     }
-  }, [current, autoPlay]); // runs whenever `current` changes
+  };
 
+  const [state, dispatch] = useReducer(quizReducer, initialState);
+  const [autoPlay, setAutoPlay] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<Letter | null>(null);
+  const shuffledLetters = useMemo(() => shuffleArray(letters), [letters]);
+
+  useEffect(() => {
+    if (letters.length > 0) {
+      dispatch({
+        type: "SET_CURRENT",
+        letter: letters[Math.floor(Math.random() * letters.length)],
+      });
+    }
+  }, []); // only once in the beggining
+
+
+  useEffect(() => {
+    if (autoPlay && currentAudio) {
+      currentAudio.play();
+    }
+  }, [state.current, autoPlay]);
+
+
+  const currentAudio = useMemo(() => (
+    state.current.sound_path ? new Audio(state.current.sound_path) : null
+  ), [state.current.sound_path]);
 
   const playSoundCurrent = () => {
-    const audio = new Audio(current.sound_path)
-
-    audio.play();
+    if (currentAudio) currentAudio.play();
   }
 
-  const checkAnswer = (selected: Letter) => {
-    if (selected.english === current.english) {
-      setMessage("✅ Correct!");
-      setStatus("correct");
-      setScore(score + 1);
+  const checkAnswer = useCallback((selected: Letter) => {
+    if (state.isDisabled) return;
+    setSelectedAnswer(selected);
+    dispatch({ type: "SET_DISABLED", disabled: true });
+
+    if (selected.english === state.current.english) {
+      dispatch({ type: "SET_MESSAGE", message: "✅ Correct!" });
+      dispatch({ type: "SET_STATUS", status: "correct" });
+      dispatch({ type: "INCREMENT_SCORE" });
     } else {
-      setMessage(`❌ Incorrect! The correct answer is: ${current.english}`);
-      setStatus("incorrect");
+      dispatch({
+        type: "SET_MESSAGE",
+        message: `❌ Incorrect! The correct answer is: ${state.current.symbol}`,
+      });
+      dispatch({ type: "SET_STATUS", status: "incorrect" });
     }
-    setAttempts(attempts + 1);
+
+    dispatch({ type: "INCREMENT_ATTEMPTS" });
 
     setTimeout(() => {
-      setCurrent(letters[Math.floor(Math.random() * letters.length)]);
-      setMessage("");
-      setStatus("");
+      setSelectedAnswer(null);
+      dispatch({
+        type: "SET_CURRENT",
+        letter: letters[Math.floor(Math.random() * letters.length)],
+      });
+
+      dispatch({ type: "SET_MESSAGE", message: "" });
+      dispatch({ type: "SET_STATUS", status: "" });
+      dispatch({ type: "SET_DISABLED", disabled: false });
     }, 1500);
-  };
+  }, [state.current, state.isDisabled, letters]);
 
   return (
     <div>
@@ -130,15 +205,16 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
 
         {/* Multiple-choice options */}
         <div className="mt-6 grid grid-cols-3 gap-4">
-          {options.map((option) => (
+          {state.options.map((option) => (
             <button
-              key={option.english}
+              key={`${option.english}-${option.symbol}`}
               className={`p-4 border rounded-lg text-lg font-bold transition-all 
-                ${status === "correct" && option.english === current.english ? "bg-green-500" : ""}
-                ${status === "incorrect" && option.english !== current.english ? "bg-red-500" : ""}
-              `}
+                  ${state.isDisabled && option.english === state.current.english ? "bg-green-500" : ""}
+                  ${state.isDisabled && option.english !== state.current.english && option.english === selectedAnswer?.english ? "bg-red-500" : ""}
+                  ${state.isDisabled ? "opacity-50 cursor-not-allowed" : ""}
+                        `}
               onClick={() => checkAnswer(option)}
-
+              disabled={state.isDisabled}
               style={{ fontFamily: "Roboto, Noto Sans JP, Gugi, sans-serif" }}
             >
               <span className="text-6xl">{option.symbol}</span>
@@ -147,23 +223,23 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
         </div>
 
         {/* Feedback message */}
-        <p className="mt-4 text-lg font-semibold">{message}</p>
+        <p className="mt-4 text-lg font-semibold">{state.message}</p>
 
         {/* Score & Accuracy */}
         <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg shadow-md text-center mt-6">
           <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
-            ✅ Score: <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">{score}</span>
+            ✅ Score: <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">{state.score}</span>
           </p>
           <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             🎯 Accuracy:
             <span className="ml-1 text-2xl font-bold text-green-600 dark:text-green-400">
-              {attempts > 0 ? ((score / attempts) * 100).toFixed(1) + "%" : "0%"}
+              {state.attempts > 0 ? ((state.score / state.attempts) * 100).toFixed(1) + "%" : "0%"}
             </span>
           </p>
         </div>
       </section>
 
-      <ListAlphabet letters={letters} language={language} />
+      <ListAlphabet letters={shuffledLetters} language={language} />
     </div>
   );
 

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 export default function Home() {
   return (

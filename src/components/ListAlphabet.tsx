@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { Button } from "./ui/button";
+import { Button } from "./ui/Button";
 import { Volume2 } from "lucide-react";
 
 type Letter = {
@@ -25,6 +25,7 @@ type Props = {
 }
 
 export default function ListAlphabet({ letters, language }: Props) {
+
   useEffect(() => {
     const fonts = {
       hangul: "Gugi",

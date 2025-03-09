@@ -1,9 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useMemo, useEffect, useState } from "react";
+import { Input } from "@/components/ui/Input";
+import { Button } from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import ListAlphabet from "./ListAlphabet";
+import { shuffleArray } from "@/lib/shuffle";
 
 type Letter = {
   symbol?: string;
@@ -58,9 +59,16 @@ export default function Quiz({ letters, title, language }: QuizProps) {
   const [score, setScore] = useState(0);
   const [attempts, setAttempts] = useState(0);
   const [status, setStatus] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
+  const shuffledLetters = useMemo(() => shuffleArray(letters), [letters]);
+
 
   const checkAnswer = () => {
+    if (isDisabled) return;
+    setIsDisabled(true);
+
     const isCorrect = input.toLowerCase() === current.english.toLowerCase();
+
     if (isCorrect) {
       setMessage("✅ Correct!");
       setStatus("correct");
@@ -75,6 +83,7 @@ export default function Quiz({ letters, title, language }: QuizProps) {
       setInput("");
       setMessage("");
       setStatus("");
+      setIsDisabled(false);
     }, 1500);
   };
 
@@ -111,7 +120,7 @@ export default function Quiz({ letters, title, language }: QuizProps) {
         />
         <br />
 
-        <Button onClick={checkAnswer} variant="negru" className="mt-4">
+        <Button onClick={checkAnswer} variant="negru" className="mt-4" disabled={isDisabled}>
           Submit
         </Button>
 
@@ -130,7 +139,7 @@ export default function Quiz({ letters, title, language }: QuizProps) {
         </div>
       </section>
 
-      <ListAlphabet letters={letters} language={language} />
+      <ListAlphabet letters={shuffledLetters} language={language} />
 
     </div>
   );
