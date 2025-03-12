@@ -192,7 +192,7 @@ export default function HearingQuiz({ letters, title, language }: QuizProps) {
         {/* Letter Display with Speaker Button */}
 
         <Button onClick={playSoundCurrent} variant="outline" className="mt-4 flex items-center p-6">
-          <Volume2 className="mr-3 w-10 h-10" /> Listen
+          <Volume2 className="mr-3 w-10 h-10 animate-pulse" /> Listen
         </Button>
 
         <Button

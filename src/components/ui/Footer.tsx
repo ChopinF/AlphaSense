@@ -11,7 +11,7 @@ export default function Footer() {
           Next.js & Tailwind
         </span>
 
-        <div className="flex justify-center items-center space-x-6 py-5 mt-4 md:mt-0">
+        <div className="flex justify-center items-center space-x-6 py-5 mt-4 md:mt-0 animate-small-bounce">
           <a
             href="https://github.com/ChopinF"
             target="_blank"

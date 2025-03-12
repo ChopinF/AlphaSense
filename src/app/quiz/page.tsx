@@ -1,8 +1,19 @@
 "use client";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import CompCard from "@/components/CompCard";
+import InfoCard from "@/components/InfoCard";
 
 export default function QuizPage() {
+  const quizzes = [
+    { title: "Cyrillic Alphabet", imageSrc: "/images/privet.svg", link: "/quiz/cyrillic", delay: 0.2 },
+    { title: "Greek Alphabet", imageSrc: "/images/kalismera.svg", link: "/quiz/greek", delay: 0.4 },
+    { title: "Arabic Alphabet", imageSrc: "/images/arab.svg", link: "/quiz/arabic", delay: 0.6 },
+    { title: "Hangul Alphabet", imageSrc: "/images/korean.svg", link: "/quiz/hangul", delay: 0.8 },
+    { title: "Hiragana Alphabet", imageSrc: "/images/hiragana.svg", link: "/quiz/hiragana", delay: 1.0 },
+    { title: "Katakana Alphabet", imageSrc: "/images/katakana.svg", link: "/quiz/katakana", delay: 1.2 },
+    { title: "Devanagari Alphabet", imageSrc: "/images/devanagari.svg", link: "/quiz/devanagari", delay: 1.4 },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
       <motion.div
@@ -19,139 +30,25 @@ export default function QuizPage() {
         </p>
       </motion.div>
 
+      <div className="mb-12 flex justify-center">
+        <InfoCard
+          icon="🧠"
+          title="Test Your Knowledge"
+          description="Dive deep into different writing systems with our quizzes. Test your knowledge, improve your skills, and learn more about the alphabets!"
+          bgColor="bg-blue-100"
+        />
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {/* Cyrillic */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/cyrillic">
-            <motion.img
-              src="/images/privet.svg"
-              alt="Cyrillic Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Cyrillic Alphabet</h3>
-          </Link>
-        </motion.div>
-
-        {/* Greek */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/greek">
-            <motion.img
-              src="/images/kalismera.svg"
-              alt="Greek Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Greek Alphabet</h3>
-          </Link>
-        </motion.div>
-
-        {/* Arabic */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/arabic">
-            <motion.img
-              src="/images/arab.svg"
-              alt="Arabic Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Arabic Alphabet</h3>
-          </Link>
-        </motion.div>
-
-        {/* Hangul */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/hangul">
-            <motion.img
-              src="/images/korean.svg"
-              alt="Hangul Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Hangul Alphabet</h3>
-          </Link>
-        </motion.div>
-
-        {/* Hiragana */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/hiragana">
-            <motion.img
-              src="/images/hiragana.svg"
-              alt="Hiragana Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Hiragana Alphabet</h3>
-          </Link>
-        </motion.div>
-
-        {/* Katakana */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1.2 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/katakana">
-            <motion.img
-              src="/images/katakana.svg"
-              alt="Katakana Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Katakana Alphabet</h3>
-          </Link>
-        </motion.div>
-
-        {/* Devanagari */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 1.4 }}
-          className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-800 dark:text-white text-center"
-        >
-          <Link href="/quiz/devanagari">
-            <motion.img
-              src="/images/devanagari.svg"
-              alt="Devanagari Alphabet"
-              className="mx-auto w-24 h-24 mb-4"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            />
-            <h3 className="text-xl font-semibold">Devanagari Alphabet</h3>
-          </Link>
-        </motion.div>
+        {quizzes.map((quiz) => (
+          <CompCard
+            key={quiz.link}
+            title={quiz.title}
+            imageSrc={quiz.imageSrc}
+            link={quiz.link}
+            delay={quiz.delay}
+          />
+        ))}
       </div>
     </div>
   );

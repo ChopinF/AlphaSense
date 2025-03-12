@@ -101,7 +101,7 @@ export default function Quiz({ letters, title, language }: QuizProps) {
         </motion.h1>
 
         <div
-          className={`mt-6 text-8xl font-bold p-6 rounded-lg transition-all duration-500 
+          className={`mt-6 text-8xl font-bold p-6 rounded-lg transition-all duration-500 animate-pulse
             ${status === "correct" ? "bg-green-800"
               : status === "incorrect" ? "bg-red-800" : "bg-gray-800 text-white"
             }`}

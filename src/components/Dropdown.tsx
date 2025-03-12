@@ -35,7 +35,7 @@ export default function DropDown({ label, items, isOpen, setIsOpen }: DropdownPr
             <li key={href}>
               <Link
                 href={href}
-                className="block px-4 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                className="block px-4 py-2 text-gray-900 hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 hover:delay-150"
                 onClick={() => setIsOpen(null)}
               >
                 {name}

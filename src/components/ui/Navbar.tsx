@@ -78,16 +78,30 @@ export default function Navbar() {
             {/* Hearing Dropdown */}
             <DropDown label="Hearing"
               items={[
-                { name: "Cyrillic", href: "/hearing/cyrillic" },
-                { name: "Greek", href: "/hearing/greek" },
-                { name: "Hangul", href: "/hearing/hangul" },
-                { name: "Hiragana", href: "/hearing/hiragana" },
-                { name: "Katakana", href: "/hearing/katakana" },
-                { name: "Arabic", href: "/hearing/arabic" },
-                { name: "Devanagari", href: "/hearing/devanagari" },
+                { name: "Cyrillic", href: "/hear/cyrillic" },
+                { name: "Greek", href: "/hear/greek" },
+                { name: "Hangul", href: "/hear/hangul" },
+                { name: "Hiragana", href: "/hear/hiragana" },
+                { name: "Katakana", href: "/hear/katakana" },
+                { name: "Arabic", href: "/hear/arabic" },
+                { name: "Devanagari", href: "/hear/devanagari" },
               ]}
               isOpen={dropdownOpen}
               setIsOpen={setDropdownOpen} />
+
+            <DropDown label="Text Extractor"
+              items={[
+                { name: "English", href: "/extract/english" },
+                { name: "Cyrillic", href: "/extract/cyrillic" },
+                { name: "Greek", href: "/extract/greek" },
+                { name: "Hangul", href: "/extract/hangul" },
+                { name: "Arabic", href: "/extract/arabic" },
+                { name: "Devanagari", href: "/extract/devanagari" },
+                { name: "Japanese", href: "/extract/japanese" },
+              ]}
+              isOpen={dropdownOpen}
+              setIsOpen={setDropdownOpen} />
+
           </ul>
         </div>
       </div>

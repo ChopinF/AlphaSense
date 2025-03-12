@@ -34,7 +34,7 @@ export default function Home() {
           transition={{ delay: 0.5, duration: 0.6 }}
         >
           <Link href="/quiz">
-            <Button variant="alb" className="w-48 py-3">
+            <Button variant="alb" className="w-48 py-3 animate-bounce">
               Alphabet Quizzes
             </Button>
           </Link>
@@ -42,11 +42,21 @@ export default function Home() {
           <div className="mt-4 text-left text-lg text-gray-600">
           </div>
 
-          <Link href="/hearing">
-            <Button variant="alb" className="w-48 py-3">
+          <Link href="/hear">
+            <Button variant="alb" className="w-48 py-3 animate-bounce">
               Hearing Quizzes
             </Button>
           </Link>
+
+          <div className="mt-4 text-left text-lg text-gray-600">
+          </div>
+
+          <Link href="/extract">
+            <Button variant="alb" className="w-48 py-3 animate-bounce">
+              Extract text
+            </Button>
+          </Link>
+
         </motion.div>
       </div>
     </section>
