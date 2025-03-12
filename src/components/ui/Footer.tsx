@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-100">
+    <footer className="w-full bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-100  ">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
         <span
           className="text-xl font-semibold dark:text-white transition-transform duration-500 ease-in-out transform hover:scale-110"

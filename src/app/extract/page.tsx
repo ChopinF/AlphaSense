@@ -16,7 +16,8 @@ export default function ExtractPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8 flex flex-col text-center">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8 flex flex-col text-center bg-gradient-to-b from-blue-50 to-blue-100 
+      dark:from-gray-900 dark:to-gray-800">
       <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-6">
         Extract text from different alphabets
       </h1>

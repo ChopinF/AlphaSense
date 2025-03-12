@@ -15,7 +15,8 @@ export default function QuizPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-6  bg-gradient-to-b from-blue-50 to-blue-100 
+      dark:from-gray-900 dark:to-gray-800">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
