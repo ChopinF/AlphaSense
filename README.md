@@ -6,17 +6,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Overview
 
-**AlphaSense**: test and improve your knowledge of alphabets and listening skills! With quizzes covering a wide range of alphabets, including Cyrillic, Greek, Hangul, Hiragana, Katakana, Arabic, and Devanagari
+**AlphaSense**: test and improve your knowledge of alphabets and listening skills! With quizzes covering a wide range of alphabets, including Cyrillic, Greek, Hangul, Hiragana, Katakana, Arabic, and Devanagari + extract text using OCR.
 
 ## Features
 
 - **Alphabet Quizzes** – Test your knowledge of different writing systems, including Cyrillic, Greek, Hangul, Hiragana, Katakana, Arabic, and Devanagari.
 - **Hearing Quizzes** – Improve your listening skills by identifying spoken alphabet characters.
+- **Extract text** using an advanced Optical Character Recognition (OCR) algorithm powered by Tesseract.
 
 ## Technologies Used
 
 - **Frontend**: Next.js, React, Tailwind CSS, Framer Motion, TypeScript
 - **State Management**: React Hooks
+- **Tesseract**: OCR(optical character recognition) engine - <https://github.com/tesseract-ocr/tesseract>
 
 ## Project Structure
 
@@ -24,7 +26,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - **app/** – Next.js app directory (Routing, Pages, Layouts)
 - **components/** – Reusable UI components
 - **lib/** – Utility functions and API handlers
-- **public/** – Static assets (SVGs, Images, Sounds)
+- **public/** – Static assets (SVGs, Images, Sounds, tessdata)
 
 ## Installation & Setup
 
