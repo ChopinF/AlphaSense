@@ -58,7 +58,7 @@ export default function Footer() {
 
         {/* Footer Copyright */}
         <div className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4 md:mt-0">
-          <p>&copy; {new Date().getFullYear()} Lazar Alexandru. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Lazăr Alexandru and Mîndrilă Răzvan. All rights reserved.</p>
         </div>
       </div>
     </footer>
