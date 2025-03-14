@@ -3,11 +3,9 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-100  ">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        <span
-          className="text-xl font-semibold dark:text-white transition-transform duration-500 ease-in-out transform hover:scale-110"
-        >
+    <footer className="w-full bg-gray-100 border-gray-200 dark:bg-gray-800 dark:border-gray-100">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-between">
+        <span className="text-xl font-semibold dark:text-white transition-transform duration-500 ease-in-out transform hover:scale-110 text-center md:text-left">
           Next.js & Tailwind
         </span>
 
@@ -58,10 +56,12 @@ export default function Footer() {
 
         {/* Footer Copyright */}
         <div className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4 md:mt-0">
-          <p>&copy; {new Date().getFullYear()} Lazăr Alexandru and Mîndrilă Răzvan. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Lazăr Alexandru and Mîndrilă
+            Răzvan. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
   );
 }
-
